@@ -1,0 +1,632 @@
+Building a Rock, Paper, Scissors Game(RPG) fCC Jan 4, 2025
+
+Step 3 
+One of the most powerful tools is your developer console. Depending on your browser, this might be opened by pressing F12 or Ctrl+Shift+I. On Mac, you can press Option + ⌘ + C and select "Console". You can also click the "Console" button above the preview window to see our built-in console.
+
+The developer console will include errors that are produced by your code, but you can also use it to see values of variables in your code, which is helpful for debugging.
+
+Add a console.log("Hello World"); line between your script tags. Then click the "Console" button to open the console. You should see the text "Hello World".
+
+Step 15
+JavaScript interacts with the HTML using the Document Object Model, or DOM. The DOM is a tree of objects that represents the HTML. You can access the HTML using the document object, which represents your entire HTML document.
+
+One method for finding specific elements in your HTML is using the querySelector() method. The querySelector() method takes a CSS selector as an argument and returns the first element that matches that selector. For example, to find the <h1> element in your HTML, you would write:
+
+Example Code
+let h1 = document.querySelector("h1");
+Note that h1 is a string and matches the CSS selector you would use.
+
+Create a button1 variable and use querySelector() to assign it your element with the id of button1. Remember that CSS id selectors are prefixed with a #.
+
+Step 36
+button1 represents your first button element. These elements have a special property called onclick, which you can use to determine what happens when someone clicks that button.
+
+You can access properties in JavaScript a couple of different ways. The first is with dot notation. Here is an example of using dot notation to set the onclick property of a button to a function reference.
+
+Example Code
+button.onclick = myFunction;
+In this example, button is the button element, and myFunction is a reference to a function. When the button is clicked, myFunction will be called.
+
+Use dot notation to set the onclick property of your button1 to the function reference of goStore. Note that button1 is already declared, so you don't need to use let or const.
+
+Step 38
+The innerText property controls the text that appears in an HTML element. For example:
+
+Example Code
+<p id="info">Demo content</p> 
+Example Code
+const info = document.querySelector("#info"); 
+info.innerText = "Hello World"; 
+The example above would change the text of the p element from Demo content to Hello World.
+
+When a player clicks your Go to store button, you want to change the buttons and text. Remove the code inside the goStore function and add a line that updates the text of button1 to say "Buy 10 health (10 gold)".
+
+Step 46
+You have repetition in the goTown and goStore functions. Repetition in your code is a sign that you need another function.
+
+In the previous project, you learned how to work with function parameters like this:
+
+Example Code
+function myFunction(param) {
+  console.log(param);
+}
+Function parameters act as placeholders for values that you pass to the function when you call it.
+
+Create an empty update function that takes a parameter called location.
+
+Step 49
+Objects are similar to arrays, except that instead of using indexes to access and modify their data, you access the data in objects through properties.
+
+Properties consist of a key and a value. The key is the name of the property, and the value is the data stored in the property.
+
+Here is an example of an object with a single property:
+
+Example Code
+const obj = {
+  name: "Quincy Larson"
+};
+Inside your cat object, add a new property. The key should be name and the value should be the string "Whiskers".
+
+Open up the console to see the updates to your object.
+
+Step 50
+If the property name (key) of an object has a space in it, you will need to use single or double quotes around the name.
+
+Here is an example of an object with a property name that has a space:
+
+Example Code
+const spaceObj = {
+  "Space Name": "Kirk",
+};
+If you tried to write a key without the quotes, it would throw an error:
+
+Example Code
+const spaceObj = {
+  // Throws an error
+  Space Name: "Kirk",
+}; 
+
+Add a new property with a key of "Number of legs" and value of 4 to the cat object.
+
+Open up the console to see the output.
+
+Step 51
+There are two ways to access the properties of an object: dot notation (.) and bracket notation ([]), similar to an array.
+
+Dot notation is what you use when you know the name of the property you're trying to access ahead of time.
+
+Example Code
+object.property;
+Here is a sample of using dot notation (.) to read the name property of the developer object:
+
+Example Code
+const developer = {
+  name: "Jessica",
+}
+
+// Output: Jessica
+console.log(developer.name); 
+Update your console statement to access the name property of the cat object using dot notation.
+
+Open up the console to see the name of "Whiskers" logged to the console.
+
+Step 52
+The second way to access the properties of an object is bracket notation ([]). If the property of the object you are trying to access has a space in its name, you will need to use bracket notation.
+
+Example Code
+objectName["property name"];
+Here is a sample of using bracket notation to read an object's property:
+
+Example Code
+const spaceObj = {
+  "Space Name": "Kirk",
+};
+
+spaceObj["Space Name"]; // "Kirk"
+Update your console statement to use bracket notation to access the property "Number of legs" of the cat object.
+
+Open up the console to see the output.
+
+Step 54
+Your locations array will hold different locations like the store, the cave, and the town square. Each location will be represented as an object.
+
+Inside your locations array, add an object. Inside that object add a key called name with a value of "town square".
+
+Remember to follow this syntax:
+
+Example Code
+{
+  key: value
+}
+
+Step 55
+Just like array values, object properties are separated by a comma. Add a comma after your name property and add a button text property with the value of an empty array.
+
+Since the property name has a space in it, you will need to surround it with quotes.
+
+Example Code
+{
+  name: "Naomi",
+  "favorite color": "purple"
+}
+
+Step 61
+Instead of assigning the innerText and onclick properties to specific strings and functions, the update function will use data from the location that is passed into it. First, that data needs to be passed.
+
+Inside the goTown function, call the update function. Here is an example of calling a function named myFunction:
+
+Example Code
+myFunction();
+
+Step 62
+Now it is time to use your update function. Pass in your locations array into the update function call.
+
+You pass arguments by including them within the parentheses of the function call. For example, calling myFunction with an arg argument would look like:
+
+Example Code
+myFunction(arg)
+Pass your locations array into the update call.
+
+Step 63
+The locations array contains two locations: the "town square" and the "store". Currently you are passing that entire array into the update function.
+
+Pass in only the first element of the locations array by adding [0] at the end of the variable. For example: myFunction(arg[0]);.
+
+This is called bracket notation. Values in an array are accessed by index. Indices are numerical values and start at 0 - this is called zero-based indexing. arg[0] would be the first element in the arg array.
+
+Step 64
+Now your update function needs to use the argument you pass into it.
+
+Inside the update function, change the value of the button1.innerText assignment to be location["button text"]. That way, you use bracket notation to get the "button text" property of the location object passed into the function.
+
+Step 73 RPG Fcc
+Now that your "store" and "cave" locations are complete, you can code the actions the player takes at those locations. Inside the buyHealth function, set gold equal to gold minus 10.
+
+For example, here is how you would set num equal to 5 less than num: num = num - 5;.
+
+Step 75
+There is a shorthand way to add or subtract from a variable called compound assignment. For example, changing num = num + 5 to compound assignment would look like num += 5.
+
+Update both lines inside your buyHealth function to use compound assignment.
+function buyHealth() {
+  gold = gold - 10;
+  health = health + 10;
+}
+
+function buyHealth() {
+  gold -= 10;
+  health += 10;
+}
+
+Step 77
+What if the player doesn't have enough gold to buy health? You should use an if statement to check if the player has enough gold to buy health.
+
+In the previous project, you learned how to work with if statements like this:
+
+Example Code
+const num = 5;
+if (num >= 3) {
+  console.log("This code will run because num is greater than or equal to 3.");
+}
+Start by placing all of the code in your buyHealth function inside an if statement. For the if statement condition, check if gold is greater than or equal to 10.
+
+
+Step 83
+Similar to your buyHealth function, set gold equal to 30 less than its current value. Make sure this is inside your if statement.
+function buyWeapon() {
+  if (gold >= 30) {
+    gold -= 30;
+  }
+}
+
+
+Step 85
+In the previous project, you learned how to use the increment operator to increase a variable by 1.
+
+Example Code
+let num = 5;
+num++;
+// prints 6
+console.log(num); 
+Change your currentWeaponIndex assignment to use the increment operator.
+
+function buyWeapon() {
+  if (gold >= 30) {
+    gold -= 30;
+    currentWeaponIndex++;
+  }
+}
+
+
+Step 90 RPG Fcc Jan 7,2024
+In the previous project, you learned how to work with the concatenation operator to insert variables into a string like this:
+
+Example Code
+const organization = "freeCodeCamp";
+
+// "Hello, our name is freeCodeCamp."
+"Hello, our name is " + organization + ".";
+Update the string "You now have a new weapon." to "You now have a " followed by the name of the new weapon, and remember to end the sentence with a period.
+
+function buyWeapon() {
+  if (gold >= 30) {
+    gold -= 30;
+    currentWeaponIndex++;
+    goldText.innerText = gold;
+    let newWeapon = weapons[currentWeaponIndex].name;
+    text.innerText = "You now have a " + newWeapon +".";
+  }
+}
+
+Step 91
+Back at the beginning of this project, you created the inventory array. Add the newWeapon to the end of the inventory array using the push() method.
+
+In the previous project, you learned how to work with the push method like this:
+
+Example Code
+const myArray = [];
+myArray.push("new item");
+// myArray is now ["new item"]
+
+inventory.push(newWeapon)
+
+Step 94
+Add an else statement to your buyWeapon function. In that statement, set text.innerText to equal "You do not have enough gold to buy a weapon.".
+
+function buyWeapon() {
+  if (gold >= 30) {
+    gold -= 30;
+    currentWeaponIndex++;
+    goldText.innerText = gold;
+    let newWeapon = weapons[currentWeaponIndex].name;
+    text.innerText = "You now have a " + newWeapon + ".";
+    inventory.push(newWeapon);
+    text.innerText += " In your inventory you have: " + inventory;
+  } else {
+    text.innerText = "You do not have enough gold to buy a weapon.";
+  }
+}
+
+Step 96
+Arrays have a length property that returns the number of items in the array. You may want to add new values to the weapons array in the future.
+
+Change your if condition to check if currentWeaponIndex is less than the length of the weapons array. An example of checking the length of an array myArray would look like myArray.length.
+
+if (currentWeaponIndex < weapons.length) {
+}
+
+
+Step 104
+Inside the if statement, set gold equal to 15 more than its current value. Also update goldText.innerText to the new value.
+
+function sellWeapon() {
+  if (inventory.length > 1) {
+    gold += 15;
+    goldText.innerText = gold;
+  }
+}
+
+Step 105
+The next step is to create a variable called currentWeapon.
+
+Example Code
+let num = 1;
+if (num === 1) {
+  let num = 2; // this num is scoped to the if statement
+  console.log(num); // expected output: 2
+}
+console.log(num); // expected output: 1 (the global variable)
+Use the let keyword to create a variable named currentWeapon. Don't assign it a value yet.
+
+function sellWeapon() {
+  if (inventory.length > 1) {
+    gold += 15;
+    goldText.innerText = gold;
+  let currentWeapon;
+  }
+}
+
+Step 106
+In the previous project, you learned how to work with the shift() method to remove the first element from an array like this:
+
+Example Code
+const myArray = ["first", "second", "third"];
+const firstElement = myArray.shift();
+// myArray is now ["second", "third"]
+Use the shift() method to take the first element from the inventory array and assign it to your currentWeapon variable.
+
+function sellWeapon() {
+  if (inventory.length > 1) {
+    gold += 15;
+    goldText.innerText = gold;
+    let currentWeapon = inventory.shift()
+  }
+}
+
+Step 108
+Now use the += operator to add the string " In your inventory you have: " and the contents of inventory to the text.innerText. Make sure to include the space at the beginning and end of the " In your inventory you have: " string.
+function sellWeapon() {
+  if (inventory.length > 1) {
+    gold += 15;
+    goldText.innerText = gold;
+    let currentWeapon = inventory.shift();
+    text.innerText = "You sold a " + currentWeapon + ".";
+
+  }
+}
+
+Step 118 RPG Fcc
+By default, the HTML element that shows the monster's stats has been hidden with CSS. When the player clicks the "Fight dragon" button, the monster's stats should be displayed. You can accomplish this by using the style and display properties on the monsterStats element.
+
+The style property is used to access the inline style of an element and the display property is used to set the visibility of an element.
+
+Here is an example of how to update the display for a paragraph element:
+
+Example Code
+const paragraph = document.querySelector('p');
+paragraph.style.display = 'block';
+Display the monsterStats element by updating the display property of the style property to block.
+
+function goFight() {
+  update(locations[3]);
+  monsterHealth = monsters[fighting].health;
+  const monsterStats = document.querySelector('monsterStats');
+   monsterStats.style.display = 'block';
+}
+
+Step 124
+The Math object in JavaScript contains static properties and methods for mathematical constants and functions. One of those is Math.random(), which generates a random number from 0 (inclusive) to 1 (exclusive). Another is Math.floor(), which rounds a given number down to the nearest integer.
+
+Using these, you can generate a random number within a range. For example, this generates a random number between 1 and 5: Math.floor(Math.random() * 5) + 1;.
+
+Following this pattern, use the addition operator (+) to add a random number between 1 and the value of xp to your monsterHealth -= weapons[currentWeaponIndex].power.
+
+ monsterHealth -= weapons[currentWeaponIndex].power + Math.floor(Math.random() * xp) + 1;
+ 
+ Step 127
+You can make an else statement conditional by using else if. Here's an example:
+
+Example Code
+if (num > 10) {
+
+} else if (num < 5) {
+
+}
+At the end of your if statement, add an else if statement to check if monsterHealth is less than or equal to 0. In your else if, call the defeatMonster function.
+ if (health <= 0) {
+    lose();
+  } else if (monsterHealth <= 0) {
+    defeatMonster();
+  }
+}
+
+
+
+Step 130
+In your defeatMonster function, set gold equal to gold plus the monster's level times 6.7. Remember you can get the monster's level by using monsters[fighting].level.
+
+Here is an example of setting num to num plus 5 * 8: num += 5 * 8. Use Math.floor() to round the result down.
+
+The Math. floor () function in JavaScript returns the largest integer less than or equal to a given number. It's the same as performing a "round down" operation. For example, Math.floor(5.5) will return 5.
+
+function defeatMonster() {
+  gold += Math.floor(monsters[fighting].level * 6.7);
+
+}
+
+
+Step 131
+Set xp to xp plus the monster's level.
+
+xp += monsters[fighting].level;
+
+Step 135
+The word "Arg!" should have quotes around it. Besides escaping quotes, there is another way you can include quotation marks inside a string.
+
+Change the double quotes around the string "The monster screams Arg! as it dies. You gain experience points and find gold." to single quotes ', then add double quotes around "Arg!"
+
+{
+    name: "kill monster",
+    "button text": ["Go to town square", "Go to town square", "Go to town square"],
+    "button functions": [goTown, goTown, goTown],
+    text: 'The monster screams "Arg!" as it dies. You gain experience points and find gold.'
+  }
+  
+  Step 140
+Back to your attack function - inside the else if block, create another if and else statement. If the player is fighting the dragon (fighting would be 2), call the winGame function. Move the defeatMonster() call to the else block.
+
+For this step, you will need to use the strict equality (===) operator to check if fighting is equal to 2.
+
+if (fighting === 2) {
+      winGame()
+    } else {
+      defeatMonster();
+    }
+    
+    Step 141
+In order for the &#x2620; emoticon text to properly display on the page, you will need to use the innerHTML property.
+
+The innerHTML property allows you to access or modify the content inside an HTML element using JavaScript.
+
+Here is an example of updating the content for this paragraph element using the innerHTML property.
+
+Example Code
+<p id="demo">This is a paragraph.</p>
+Example Code
+document.querySelector("#demo").innerHTML = "Hello, innerHTML!";
+
+
+
+Step 148
+In the previous project, you learned how to work with the return keyword to return a value from a function like this:
+
+Example Code
+function add(num1, num2) {
+  return num1 + num2;
+}
+Use the return keyword to return the value of hit at the end of the function.
+function getMonsterAttackValue(level) {
+  const hit = (level * 5) - (Math.floor(Math.random() * xp));
+  console.log(hit);
+  return hit
+}
+
+Step 149
+If you play the game in its current state you might notice a bug. If your xp is high enough, the getMonsterAttackValue function will return a negative number, which will actually add to your total health when fighting a monster! You can fix this issue by using a ternary operator to ensure negative values are not returned.
+
+The ternary operator is a conditional operator and can be used as a one-line if-else statement. The syntax is: condition ? expressionIfTrue : expressionIfFalse.
+
+Here is an example of returning a value using an if-else statement and a refactored example using a ternary operator:
+
+Example Code
+// if-else statement
+if (score > 0) {
+  return score
+} else {
+  return default_score
+}
+
+// ternary operator
+return score > 0 ? score : default_score
+In getMonsterAttackValue, change return hit to a ternary operator that returns hit if hit is greater than 0, or returns 0 if it is not.
+
+function getMonsterAttackValue(level) {
+  const hit = (level * 5) - (Math.floor(Math.random() * xp));
+  console.log(hit);
+  return hit > 0 ? hit : 0
+}
+
+Step 156
+Remember that the increment operator ++ can be used to increase a variable's value by 1. There is also a decrement operator -- that can be used to decrease a variable's value by 1. For example :
+
+Example Code
+let num = 10;
+num--;
+console.log(num); // Output: 9
+Decrement the value of currentWeaponIndex in your if statement, after you update the text.
+
+  if (Math.random() <= .1) {
+    text.innerText += " Your " + inventory.pop() + " breaks.";
+    currentWeaponIndex--;
+  }
+  
+  Step 157
+We don't want a player's only weapon to break. The logical AND operator checks if two statements are true.
+
+Use the logical AND operator && to add a second condition to your if statement. The player's weapon should only break if inventory.length does not equal (!==) one.
+
+Here is an example of an if statement with two conditions:
+
+Example Code
+if (firstName === "Quincy" && lastName === "Larson") {
+
+}
+
+if (Math.random() <= .1 && inventory.length !== 1) {
+    text.innerText += " Your " + inventory.pop() + " breaks.";
+    currentWeaponIndex--;
+  }
+  
+ 
+Step 163 RPG Fcc Jan 11, 2025
+After your numbers array, create a while loop that runs as long as numbers.length is less than 10.
+
+In the previous project, you learned how to work with while loops like this:
+
+Example Code
+while (condition) {
+  // code to run
+}
+
+function pick(guess) {
+  const numbers = [];
+  while (numbers.length < 10) {
+    
+  }
+}
+
+Step 164
+Inside your while loop, push a random number between 0 and 10 to the end of the numbers array. You can create this random number with Math.floor(Math.random() * 11).
+
+function pick(guess) {
+  const numbers = [];
+  while (numbers.length < 10) {
+    numbers.push(Math.floor(Math.random() * 11));
+  }
+}
+
+Step 166
+At the end of the string, before the final quote, insert the new line escape character \n. This will cause the next part you add to text.innerText to appear on a new line.
+E.g
+const testStr = "Hello, World,\nand all you beautiful people in it!
+
+console.log(testStr);
+/*
+Hello, World,
+and all you beautiful people in it!
+*/
+text.innerText = "You picked " + guess + ". Here are the random numbers:\n";
+
+Step 167
+In the previous project, you learned how to work with for loops like this:
+
+Example Code
+for (let i = 0; i < 5; i++) {
+  // code to run
+}
+for loops are declared with three expressions separated by semicolons: for (a; b; c), where a is the initialization expression, b is the condition, and c is the final expression.
+
+In this step, create a for loop where i is initialized to 0, the loop runs as long as i is less than 10, and i is incremented by 1 after each iteration using the increment operator ++.
+for (let i = 0; i < 10; i++);
+
+Step 168
+Now you can write the logic to run in the loop. Inside your for loop, use the += operator to add to the end of text.innerText. Add the number at index i of the numbers array, using numbers[i]. Then add a new line, using the escape sequence you used earlier.
+
+text.innerText += numbers[i] + "\n";
+
+Step 169
+The .includes() method determines if an array contains an element and will return either true or false.
+
+Here is an example of the .includes() syntax:
+
+Example Code
+const numbersArray = [1, 2, 3, 4, 5]
+const number = 3
+
+if (numbersArray.includes(number)) {
+  console.log("The number is in the array.")
+}
+After your for loop, add an if statement to check if the guess is in the numbers array. You can use the .includes() method to check if the array contains the guess.
+
+for (let i = 0; i < 10; i++) {
+    text.innerText += numbers[i] + "\n";
+  }
+  if (numbers.includes(guess)) {
+    
+  }
+}
+
+Step 170
+Inside the if statement, add the string "Right! You win 20 gold!" to the end of text.innerText. Also, add 20 to the value of gold and update the goldText.innerText.
+
+if (numbers.includes(guess)) {
+  text.innerText +=  "Right! You win 20 gold!";
+  gold += 20;
+  goldText.innerText = gold;
+  }
+
+  if (numbers.includes(guess)) {
+    text.innerText += "Right! You win 20 gold!";
+    gold += 20;
+    goldText.innerText = gold;
+  } else {
+    text.innerText += "Wrong! You lose 10 health!"
+    health -= 10;
+    healthText.innerText = health;
+  }
+  
+  Step 172
+Since you subtracted health from the player, you need to check if the player's health is less than or equal to 0. If it is, call the lose function.
+  
+  if (health <= 0) {
+      lose()

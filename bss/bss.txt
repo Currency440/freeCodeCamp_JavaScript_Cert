@@ -1,0 +1,1198 @@
+Functional Programming by Building a Spreadsheet (BSS) fCC March 29,2025.
+
+Functional Programming is a popular approach to software development. In Functional Programming, developers organize code into smaller functions, then combine those functions to build complex programs.
+In this spreadsheet application project, you'll learn about parsing and evaluating mathematical expressions, implementing spreadsheet functions, handling cell references, and creating interactive web interfaces. You'll learn how to dynamically update the page based on user input.
+This project will cover concepts like the map(), find(), and includes() methods and the parseInt() function.
+
+Step 1
+Your project starts with a basic HTML container and some corresponding CSS. Your first task will be to programmatically generate the cells for your spreadsheet.
+The global window object represents the browser window (or tab). It has an onload property which allows you to define behavior when the window has loaded the entire page, including stylesheets and scripts.
+Start by setting the onload property of window to an arrow function with no parameters. In the function, declare a container variable and assign it the value of getting the element by the id of "container".
+Hints
+You should access the onload property of the window object.
+2. You should set the onload property to a function.
+3. You should use arrow syntax.
+4. Your onload function should not take any parameters.
+5. You should declare a container variable in your onload function.
+6. Your container variable should be declared with const.
+7. You should use document.getElementById()
+8. You should get the element with the id of "container".
+9. You should assign the #container element to container.
+
+Step 1 Solution
+window.onload = () => {
+  const container = document.getElementById("container");
+};
+
+Step 2
+Functions are ideal for reusable logic. When a function itself needs to reuse logic, you can declare a nested function to handle that logic. Here is an example of a nested function:
+Example Code
+const outer = () => {
+  const inner = () => {
+
+  };
+};
+Declare a nested createLabel function using arrow syntax. It should take a name parameter.
+Step 2 Solution
+window.onload = () => {
+  const container = document.getElementById("container");
+  const createLabel = (name) => {
+
+  };
+
+}
+
+Step 3
+Remember that the document object has a .createElement() method which allows you to dynamically create new HTML elements.
+In your createLabel function, declare a label variable and assign it a new div element.
+Hints
+1. You should declare a label variable in your createLabel function.
+2. Your label variable should be declared with const.
+3. You should use the .createElement() method of the document object.
+4. You should pass the string "div" to the .createElement() method.
+5. You should assign your new div element to label.
+Step 3 Solution
+window.onload = () => {
+  const container = document.getElementById("container");
+  const createLabel = (name) => {
+  const label = document.createElement("div");
+  }
+}
+
+Step 4
+Set the className of the label element to "label", and set the textContent to the name parameter.
+Hints
+1. You should access the className property of the label element.
+2. You should set the className property to the string "label".
+3. You should access the textContent property of the label element.
+4. You should set the textContent property to the value of name.
+
+Step 4 Solution
+window.onload = () => {
+  const container = document.getElementById("container");
+  const createLabel = (name) => {
+    const label = document.createElement("div");
+    label.className = "label";
+    label.textContent = name;
+  }
+}
+
+Step 5
+Finally, use the .appendChild() method to add your label element to the container element.
+1. You should access the .appendChild() method of the container element.
+2. You should pass your label element to the .appendChild() method.
+3. You should append label after setting the attributes.
+Step 5 Solution
+window.onload = () => {
+  const container = document.getElementById("container");
+  const createLabel = (name) => {
+    const label = document.createElement("div");
+    label.className = "label";
+    label.textContent = name;
+    container.appendChild(label);
+  }
+}
+
+Step 6
+You will need a function to generate a range of numbers.
+Declare an empty range function which takes a start and end parameter. Use the Array() constructor and implicitly return an empty array.
+Hints
+1. You should declare a range variable.
+2. You should use const to declare your range variable.
+3. Your range variable should be a function.
+4. Your range function should use arrow syntax.
+5. Your range function should take a start parameter first.
+6. Your range function should take an end parameter second.
+8. Your range function should use the Array() constructor. Primitive constructors do not need the new keyword.
+9. You should not pass anything to the Array() constructor.
+Step 6 Solution
+const range = (start, end) => Array();
+
+Step 7
+Your array will need to be the size of the range. You can calculate this by finding the difference between end and start, and adding 1 to the result.
+Pass this calculation as the argument for your Array() constructor.
+Hints
+1. You should subtract start from end.
+2. You should add 1 to your end - start calculation.
+3. You should pass your calculation to the Array() constructor.
+Step 7 Solution
+const range = (start, end) => Array(end - start + 1);
+
+Step 8
+The Array() constructor has a .fill() method which can be used to fill an array with a value. You can use this to fill your array with the start value.
+Chain the .fill() method to your Array() constructor, and pass it the start value.
+Step 8 Solution
+const range = (start, end) => Array(end - start + 1).fill(start);
+
+Step 9
+Currently your range function returns an array with the correct length, but all of the values are the value of start. To fix this, chain the .map() method to your .fill() method.
+Pass the .map() method a callback which takes element and index as parameters and returns the sum of those parameters.
+Step 9 Solution
+const range = (start, end) => Array(end - start + 1).fill(start).map((element, index) => element + index);
+
+Step 10
+Now that you have a range function, you can use it to create a range of letters as well.
+Declare a charRange function using const and arrow syntax. It should take a start and end parameter. The function should implicitly return the result of calling range() with start and end as the arguments.
+Step 10 Solution 
+const charRange = (start, end) => range(start, end);
+
+Step 11
+Your range function expects numbers, but your start and end values will be strings (specifically, they will be single characters such as A).
+Convert your start and end values in your range() call to numbers by using the .charCodeAt() method on them, passing the number 0 as the argument to that method.
+Hints
+1. You should use the .charCodeAt() method.
+2. You should call the .charCodeAt() method on start.
+3. You should pass 0 to the .charCodeAt() method of start.
+4. You should call the .charCodeAt() method on end.
+5. You should pass 0 to the .charCodeAt() method of end.
+6. You should use the .charCodeAt() methods directly in your range call.
+Step 11 Solution
+const charRange = (start, end) => range(start.charCodeAt(0), end.charCodeAt(0));
+
+Step 12
+range() will return an array of numbers, which you need to convert back into characters. Chain the .map() method to your range() call.
+Pass a callback function that takes code as the parameter and implicitly returns the value of passing code to the String.fromCharCode() method.
+Step 12 Solution
+const charRange = (start, end) => range(start.charCodeAt(0), end.charCodeAt(0)).map((code) => String.fromCharCode(code));
+
+Step 13
+Now that your helper functions are complete, back in your onload event handler you should declare a letters variable. Assign it the result of calling charRange() with the letters "A" and "J" as arguments.
+const letters = charRange("A", "J");
+
+Step 14
+Now call the .forEach() method of your letters array, and pass your createLabel function reference as the callback.
+You should see some letters appear across the top of your spreadsheet.
+Hints
+1. You should call the .forEach() method on your letters array.
+2. You should pass your createLabel function reference to the .forEach() method.
+Step 14 Solution
+letters.forEach(createLabel);
+
+Step 15
+Remember that range() returns an array, so you can chain array methods directly to the function call.
+Call range() with 1 and 99 as the arguments, and chain the .forEach() method. Pass the .forEach() method an empty callback which takes number as the parameter.
+Hints
+1. You should call your range() function.
+2. You should pass 1 as the first argument to your range() call.
+3. You should pass 99 as the second argument to your range() call.
+4. You should chain the .forEach() method to your range() call.
+5. You should pass a callback function to .forEach() using arrow syntax.
+6. Your callback function should have number as the only parameter.
+Step 15 Solution
+range(1,99).forEach((number) => {});
+
+Step 16
+In your callback, you will need to make two function calls. Start by calling createLabel() and pass number as the argument. You should see some numbers appear in your spreadsheet.
+Then call the .forEach() method on your letters array. Pass an empty callback function which takes a letter parameter.
+Step 16 Solution
+  range(1, 99).forEach(number => {
+    createLabel(number);
+    letters.forEach((letter) => {});
+  })
+  
+Step 17
+Now in your nested .forEach() call, declare an input variable. Use the .createElement() method of the document object to create an input element. Set the type attribute to "text" and the id attribute to letter + number.
+Hints
+1. You should declare an input variable.
+2. You should use const to declare your input variable.
+3. You should call the .createElement() method of the document object.
+4. You should pass the string "input" to the .createElement() method.
+5. You should assign your new input element to your input variable.
+6. You should access the type property of your input element.
+7. You should set the type attribute of your input element to "text".
+8. You should access the id property of your input element.
+9. You should set the id attribute of your input element to letter + number.
+Step 17 Solution
+letters.forEach(letter => {
+const input = document.createElement("input");
+input.type = "text";
+input.id = letter + number;
+input.ariaLabel = letter + number;
+})
+
+Step 18
+In earlier projects you learned about the setAttribute method. Another way to update an attribute in JavaScript is to use the following syntax:
+Example Code
+el.attribute = value;
+The property names for hyphenated HTML attribute values, such as aria-label, follow camel case, becoming ariaLabel.
+Example Code
+el.ariaLabel = "Aria Label Value";
+Set the aria-label attribute for the input element to the same value as the id attribute.
+Step 18 Solution
+input.ariaLabel = letter + number;
+
+Step 19
+Append the input element to your container element as a child.
+You should now be able to see the cells of your spreadsheet.
+1. You should call the .appendChild() method on your container element.
+2. You should pass your input element to the .appendChild() method.
+Step 19 Solution
+letters.forEach(letter => {
+const input = document.createElement("input");
+input.type = "text";
+input.id = letter + number;
+input.ariaLabel = letter + number;
+container.appendChild(input);
+})
+
+Step 20
+Most spreadsheet programs include built-in functions for calculation.
+Declare a sum function that takes a nums parameter, which will be an array of numbers. It should return the result of calling reduce on the array to sum all of the numbers.
+Hints
+1. You should declare a sum variable.
+2. You should use const to declare your sum variable.
+3. Your sum variable should be a function.
+4. Your sum function should use arrow syntax.
+5. Your sum function should have a nums parameter.
+7. Your sum function should return the result of calling .reduce() on nums.
+8. Your sum function should return the sum of all numbers in nums.
+Step 20 Solution
+const sum = (nums) => nums.reduce((acc, el) => acc + el);
+
+
+Step 21
+Declare an isEven function, which takes a num parameter and returns true if the number is even, and false otherwise. Use the modulo operator % to determine if a number is even or odd.
+Step 21 Solution
+const isEven = (num) => num % 2 === 0? true : false;
+
+Step 22
+Declare an average function which takes an array of numbers as the nums parameter. It should return the average of all the numbers in the array.
+The average can be calculated by dividing the sum of all the numbers in the array by the length of the array. Remember that you have a sum function you can use.
+Hints
+1. You should declare an average variable.
+2. You should use const to declare your average variable.
+3. Your average variable should be a function.
+4. Your average function should use arrow syntax.
+5. Your average function should have a nums parameter.
+7. Your average function should return the average value of the nums array.
+Step 22 Solution
+const average = (nums) => sum(nums)/nums.length;
+
+Step 23
+Your next function will calculate the median value of an array of numbers. Start by declaring a median arrow function that takes a nums parameter.
+In the function, declare a sorted variable and assign it the value of sorting a copy of the nums array.
+You should use the slice() method for creating a shallow copy of the array.
+Hints
+1. You should declare a median variable.
+2. You should use const to declare your median variable.
+3. Your median variable should be a function.
+4. Your median function should use arrow syntax.
+5. Your median function should have a nums parameter.
+6. Your median function should not use an implicit return.
+7. Your median function should have a sorted variable.
+8. You should use const to declare your sorted variable.
+9. You should use .slice() to assign a copy of the nums array to sorted.
+10. You should chain the .sort() method to your .slice() method.
+11. You should pass a callback function to your sort method to accurately sort the numbers in ascending order. Use an implicit return for clarity.
+Step 23 Solution
+const median = (nums) => {
+  const sorted = nums.slice().sort((a, b) => a - b) ;
+};
+
+Step 24
+Now declare a length variable and assign it the length of your sorted array, and a middle variable that has the value of the length divided by 2, subtracted by 1.
+Hints
+1.You should declare a length variable after your sorted variable.
+2. You should use const to declare your length variable.
+3. You should assign the length of the sorted array to your length variable.
+4. You should declare a middle variable after your length variable.
+5. You should use const to declare your middle variable.
+6. You should assign middle the value of dividing your length variable by 2.
+7. You should subtract 1 from your length / 2 calculation.
+Step 24 Solution
+const length = sorted.length;
+const middle = length/2 - 1;
+
+Step 25
+Check if length is even using your isEven function. If it is, return the average of the number at the middle index and the number after that. If it's odd, return the number at the middle index – you'll need to round the middle value up.
+Hints
+ You should return a value from the median function.
+2. If length is even, you should return the average of the number at the middle index and the number after it.
+3. If length is odd, you should return the value at the middle index.
+Step 25 Solution
+const median = nums => {
+  const sorted = nums.slice().sort((a, b) => a - b);
+  const length = sorted.length;
+  const middle = length / 2 - 1;
+  return isEven(length) ? average([sorted[middle], sorted[middle +1]]) : sorted[Math.ceil(middle)];
+}
+
+Step 26
+
+Object properties consist of key/value pairs. You can use shorthand property names when declaring an object literal. When using the shorthand property name syntax, the name of the variable becomes the property key and its value the property value.
+The following example declares a user object with the properties userId, firstName, and loggedIn.
+Example Code
+const userId = 1;
+const firstName = "John";
+const loggedIn = true;
+const user = {
+  userId,
+  firstName,
+  loggedIn,
+};
+console.log(user); // { userId: 1, firstName: 'John', loggedIn: true }
+To keep track of all of your spreadsheet's functions, declare a spreadsheetFunctions object. Using the shorthand notation syntax, set sum, average, and median as properties on the spreadsheetFunctions object.
+
+Step 26 Solution
+const spreadsheetFunctions = {
+ sum,
+ average,
+ median
+};
+
+Step 27
+Now you can start using your spreadsheet functions. Begin by declaring an update arrow function. It should take an event parameter.
+ const update = (event) => {};
+ 
+Step 28
+In your window.onload function, you need to tell your input elements to call the update function when the value changes. You can do this by directly setting the onchange property.
+Set the onchange property to be a reference to your update function.
+Hints
+1. Your window.onload function should access the onchange property of the input element.
+2. Your window.onload function should set the onchange property to update.
+4. Your input elements should all have your update function as the onchange property.
+Step 28 Solution
+input.onchange=update;
+
+Step 29
+Since your update event is running as a change event listener, the event parameter will be a change event.
+The target property of the change event represents the element that changed. Assign the target property to a new variable called element.
+Hints
+1.You should declare an element variable in your update function.
+2. You should use const to declare your element variable.
+3. You should assign the target property of the event parameter to your element variable.
+ const element = event.target;
+ 
+Step 30
+Because the change event is triggering on an input element, the element will have a value property that represents the current value of the input.
+Assign the value property of element to a new variable called value, and use .replace() to remove all whitespace.
+Hints
+1.You should declare a value variable after your element variable.
+2. You should use const to declare your value variable.
+3. You should assign the value property of element to your value variable.
+4. You should call the .replace() method on the value property of the element.
+5. You should pass a regular expression to match whitespace to your .replace() method. Use the \s character class.
+6. You should make your regular expression global.
+7. You should pass an empty string as your second argument to the .replace() method.
+Step 30 Solution
+const update = event => {
+  const element = event.target;
+   const value = element.value.replace(/\s/g, "");
+}
+
+Step 31
+Now you need to check if the value does not include the id of the element. Create an if condition to do so.
+const update = event => {
+  const element = event.target;
+  const value = element.value.replace(/\s/g, "");
+  if (!value.includes(element.id)) {
+
+  }
+}
+
+Step 32
+Spreadsheet software typically uses = at the beginning of a cell to indicate a calculation should be used, and spreadsheet functions should be evaluated.
+Use the && operator to add a second condition to your if statement that also checks if the first character of value is "=".
+Hints 
+You should use the && operator to add a second condition to your if statement that also checks if the first character of value is "=". You may use [0], .startsWith(), or .charAt(0).
+Step 32 Solution
+const update = event => {
+  const element = event.target;
+  const value = element.value.replace(/\s/g, "");
+  if (!value.includes(element.id) && value.startsWith("=")) {
+
+  }
+}
+
+Step 33
+In order to run your spreadsheet functions, you need to be able to parse and evaluate the input string. This is a great time to use another function.
+Declare an evalFormula arrow function which takes the parameters x and cells.
+const evalFormula = (x, cells) => {};
+
+Step 34
+In your evalFormula, declare an idToText arrow function which takes an id parameter.
+Your idToText function should return the result of calling .find() on the cells array with a callback function that takes an cell parameter and returns cell.id === id.
+Both of your functions should use implicit returns.
+Step 34 Solution
+const evalFormula = (x, cells) => {
+  const idToText = (id) => cells.find((cell) => cell.id === id);
+}
+
+Step 35
+Your idToText function currently returns an input element. Update it to return the value of that input element.
+Step 35 Solution
+const evalFormula = (x, cells) => {
+   const idToText = id => cells.find(cell => cell.id === id).value;
+}
+
+Step 36
+You need to be able to match cell ranges in a formula. Cell ranges can look like A1:B12 or A3:A25. You can use a regular expression to match these patterns.
+Start by declaring a rangeRegex variable and assign it a regular expression that matches A through J (the range of columns in your spreadsheet). Use a capture group with a character class to achieve this.
+Hints
+1. You should declare a rangeRegex variable after your idToText function.
+2. You should use const to declare your rangeRegex variable.
+3. Your rangeRegex variable should be a regular expression.
+4. Your rangeRegex should use a capture group.
+5. Your rangeRegex should use a character class in the capture group.
+6. Your rangeRegex should use a character class to match A through J
+Step 36 Solution
+const evalFormula = (x, cells) => {
+  const idToText = id => cells.find(cell => cell.id === id).value;
+    const rangeRegex = /([A-J])/;
+}
+
+Step 37
+After matching a cell letter successfully, your rangeRegex needs to match the cell number. Cell numbers in your sheet range from 1 to 99.
+Add a capture group after your letter capture group. Your new capture group should match one or two digits – the first digit should be 1 through 9, and the second digit should be 0 through 9. The second digit should be optional.
+Hints
+1.You should add a second capture group to your rangeRegex.
+2. Your second capture group should have a character class.
+3. Your second capture group should have two character classes.
+4. Your first new character class should match the digits 1 through 9.
+5. Your second new character class should match the digits 0 through 9.
+6. Your second new character class should be optional.
+Step 37 Solution
+const evalFormula = (x, cells) => {
+  const idToText = id => cells.find(cell => cell.id === id).value;
+  const rangeRegex = /([A-J])([1-9][0-9]?)/;
+}
+
+Step 38
+Ranges are separated by a colon. After your two capture groups, your rangeRegex should look for a colon.
+Hints 
+You should add a colon after your second capture group.
+Step 38 Solution
+const evalFormula = (x, cells) => {
+  const idToText = id => cells.find(cell => cell.id === id).value;
+    const rangeRegex = /([A-J])([1-9][0-9]?):/;
+}
+
+Step 39
+After your rangeRegex finds the :, it needs to look for the same letter and number pattern as it did before.
+Copy your two existing capture groups and paste them after the colon.
+Step 39 Solution
+const evalFormula = (x, cells) => {
+  const idToText = id => cells.find(cell => cell.id === id).value;
+   const rangeRegex = /([A-J])([1-9][0-9]?):([A-J])([1-9][0-9]?)/;
+}
+
+Step 40
+Finally, make your rangeRegex global and case-insensitive.
+Your rangeRegex should be case-insensitive.
+2. Your rangeRegex should be global.
+3. Your rangeRegex should be both global and case-insensitive.
+Step 40 Solution
+const evalFormula = (x, cells) => {
+  const idToText = id => cells.find(cell => cell.id === id).value;
+  const rangeRegex = /([A-J])([1-9][0-9]?):([A-J])([1-9][0-9]?)/gi;
+}
+
+Step 41
+Declare a rangeFromString arrow function that takes two parameters, num1 and num2. The function should implicitly return the result of calling range with num1 and num2 as arguments.
+To be safe, parse num1 and num2 into integers as you pass them into range.
+Hints
+You should declare a rangeFromString variable after your rangeRegex.
+2. You should use const to declare your rangeFromString variable.
+3. Your rangeFromString variable should be an arrow function.
+4. Your rangeFromString function should have num1 as the first parameter.
+5. Your rangeFromString function should have num2 as the second parameter.
+7. Your rangeFromString function should return the result of calling your range function.
+8. You should call parseInt with num1 as an argument and pass the result to the range call.
+9. You should call parseInt with num2 as the argument and pass the result to the range call.
+Step 41 Solution
+const evalFormula = (x, cells) => {
+  const idToText = id => cells.find(cell => cell.id === id).value;
+  const rangeRegex = /([A-J])([1-9][0-9]?):([A-J])([1-9][0-9]?)/gi;
+  const rangeFromString = (num1, num2) => range(parseInt(num1),parseInt(num2));
+}
+
+Step 42
+Declare a function elemValue which takes a num parameter. The function should be empty.
+const elemValue = (num) => {};
+
+Step 43
+In your elemValue function, declare a function called inner which takes a character parameter.
+Then, return your inner function.
+Hints
+1.You should declare an inner variable.
+2. You should use const to declare your inner variable.
+3. Your inner variable should be an arrow function.
+4. Your inner function should have character as the only parameter.
+5. Your inner function should be empty.
+6. You should explicitly return your inner function.
+
+Step 43 Solution
+  const elemValue = num => {
+    const inner = (character) => {};
+    return inner();
+  }
+
+Step 44
+In your inner function, return the result of calling idToText with character + num as the argument.
+Step 44 Solution
+ const elemValue = num => {
+    const inner = character => {
+      return idToText(character + num );
+    }
+    return inner;
+  }
+  
+Step 45
+
+The concept of returning a function within a function is called currying. This approach allows you to create a variable that holds a function to be called later, but with a reference to the parameters of the outer function call.
+
+For example:
+Example Code
+
+const innerOne = elemValue(1);
+const final = innerOne("A");
+
+innerOne would be your inner function, with num set to 1, and final would have the value of the cell with the id of "A1". This is possible because functions have access to all variables declared at their creation. This is called closure.
+
+You'll get some more practice with this. Declare a function called addCharacters which takes a character1 parameter.
+const addCharacters = (character1) => {};
+
+Step 46
+In your elemValue function, you explicitly declared a function called inner and returned it. However, because you are using arrow syntax, you can implicitly return a function. For example:
+Example Code
+const curry = soup => veggies => {};
+curry is a function which takes a soup parameter and returns a function which takes a veggies parameter. Using this syntax, update your addCharacters function to return an empty function which takes a character2 parameter.
+Step 46 Solution
+const addCharacters = character1 => character2=> {};
+
+Step 47
+Your inner functions can also return a function. Using the same arrow syntax, update your addCharacters function to return a third function which takes a num parameter.
+Step 47 Solution
+const addCharacters = character1 => character2 => num => {};
+
+Step 48
+Now update your innermost function in the addCharacters chain to implicitly return the result of calling charRange() with character1 and character2 as the arguments.
+Step 48 Solution
+const addCharacters = character1 => character2 => num => charRange(character1, character2);
+
+Step 49
+Use the same syntax as your addCharacters function to update your elemValue function. It should no longer declare inner, but should return the function implicitly.
+Step 49 Solution
+const elemValue = num => character => idToText(character + num);
+
+Step 50
+Your addCharacters function ultimately returns a range of characters. You want it to return an array of cell ids. Chain the .map() method to your charRange() call. Do not pass a callback function yet.
+Step 50 Solution
+const addCharacters = character1 => character2 => num => charRange(character1, character2).map();
+
+Step 51
+You can pass a function reference as a callback parameter. A function reference is a function name without the parentheses. For example:
+Example Code
+const myFunc = (val) => value: ${val};
+const array = [1, 2, 3];
+const newArray = array.map(myFunc);
+The .map() method here will call the myFunc function, passing the same arguments that a .map() callback takes. The first argument is the value of the array at the current iteration, so newArray would be [value: 1, value: 2, value: 3].
+Pass a reference to your elemValue function as the callback to your .map() method.
+Step 51 Solution
+  const addCharacters = character1 => character2 => num => charRange(character1, character2).map(elemValue);
+  
+Step 52
+Because elemValue returns a function, your addCharacters function ultimately returns an array of function references. You want the .map() method to run the inner function of your elemValue function, which means you need to call elemValue instead of reference it. Pass num as the argument to your elemValue function.
+Step 52 Solution
+ const addCharacters = character1 => character2 => num => charRange(character1, character2).map(elemValue(num));
+ 
+Step 53
+Declare a rangeExpanded variable and assign it the result of calling the .replace() method of your x parameter. Pass the rangeRegex variable as the argument.
+Step 53 Solution
+const rangeExpanded = x.replace(rangeRegex);
+
+Step 54
+The second argument to the .replace() method does not have to be a string. You can instead pass a callback function to run more complex logic on the matched string.
+The callback function takes a few parameters. The first is the matched string. Pass an empty callback function to your .replace() call, and give it a match parameter.
+Step 54 Solution
+const rangeExpanded = x.replace(rangeRegex, (match) => {});
+
+Step 55
+The callback function should have a parameter for each capture group in the regular expression. In your case, rangeRegex has four capture groups: the first letter, the first numbers, the second letter, and the second numbers.
+Give your callback function four more parameters to match those capture groups: char1, num1, char2, and num2. char will be short for character.
+Hints
+1. Your callback function should have char1 as the second parameter.
+2. Your callback function should have num1 as the third parameter.
+3. Your callback function should have char2 as the fourth parameter.
+4. Your callback function should have num2 as the fifth parameter.
+
+Step 55 Solution
+const rangeExpanded = x.replace(rangeRegex, (match,char1, num1, char2, num2) => {});
+
+Step 56
+Have your callback implicitly return the result of calling rangeFromString() with num1 and num2 as the arguments.
+Step 56 Solution
+const rangeExpanded = x.replace(rangeRegex, (match, char1, num1, char2, num2) => rangeFromString(num1, num2));
+
+Step 57
+Call the .map() method on your rangeFromString() call, passing a reference to addCharacters as the callback function.
+Step 57 Solution
+ const rangeExpanded = x.replace(rangeRegex, (match, char1, num1, char2, num2) => rangeFromString(num1, num2).map(addCharacters));
+ 
+Step 58
+addCharacters returns a function, so you'll want to call it. Pass char1 as the argument.
+Step 58 Solution
+ const rangeExpanded = x.replace(rangeRegex, (match, char1, num1, char2, num2) => rangeFromString(num1, num2).map(addCharacters(char1)));
+ 
+ Step 59
+Your addCharacters(char1) is also returning a function, which returns another function. You need to make another function call to access that innermost function reference for the .map() callback. JavaScript allows you to immediately invoke returned functions:
+Example Code
+myFunc(1)("hi");
+Immediately invoke the function returned from your addCharacters(char1) call, and pass char2 as the argument.
+Hints
+1. You should chain a function call to your addCharacters(char1) call.
+2. You should pass char2 as the argument to your chained function call.
+Step 59 Solution
+const rangeExpanded = x.replace(rangeRegex, (match, char1, num1, char2, num2) => rangeFromString(num1, num2).map(addCharacters(char1)(char2)));
+
+Step 60
+Now that your .map() function is receiving the returned num => charRange(...).map(...) function reference from the curried addCharacters calls, it will properly iterate over the elements and pass each element as n to that function.
+You'll notice that you are not using your match parameter. In JavaScript, it is common convention to prefix an unused parameter with an underscore _. You could also leave the parameter empty like so: (, char1) but it is often clearer to name the parameter for future readability.
+Prefix your match parameter with an underscore.
+Step 60 Solution
+const rangeExpanded = x.replace(rangeRegex, (_match, char1, num1, char2, num2) => rangeFromString(num1, num2).map(addCharacters(char1)(char2)));
+
+Step 61
+Declare a variable cellRegex to match cell references. It should match a letter from A to J, followed by a digit from 1 to 9, and an optional digit from 0 to 9. Make the regular expression case-insensitive and global.
+Step 61 Solution
+const cellRegex = /[A-J][1-9][0-9]?/gi;
+
+Step 62
+Declare a cellExpanded variable and assign it the value of calling .replace() on your rangeExpanded variable. Pass it your cellRegex and an empty callback function. The callback function should take a match parameter.
+Step 62 Solution
+ const cellExpanded = rangeExpanded.replace(cellRegex, (match) => {});
+ 
+Step 63
+Update your callback function to return the result of calling idToText() with match as the argument. Remember that your regular expression is case-insensitive, so you will need to call toUpperCase() on match before passing it to idToText().
+Step 63 Solution
+const cellExpanded = rangeExpanded.replace(cellRegex, match => idToText(match.toUpperCase()));
+
+Step 64
+In mathematics, an infix is a mathematical operator that appears between its two operands. For example, 1 + 2 is an infix expression.
+To parse these expressions, you will need to map the symbols to relevant functions. Declare an infixToFunction variable, and assign it an empty object.
+const infixToFunction = {};
+
+Step 65
+Object values do not have to be primitive types, like a string or a number. They can also be functions.
+Give your infixToFunction object a + property. That property should be a function that takes an x and y parameter and implicitly returns the sum of those two parameters.
+Because + is not alphanumeric, you'll need to wrap it in quotes for your property.
+Step 65 Solution
+const infixToFunction = {
+ "+": (x,y) => x + y, 
+}
+
+Step 66
+Now create a - property that is a function that takes an x and y parameter and implicitly returns the result of subtracting y from x.
+const infixToFunction = {
+  "+": (x, y) => x + y,
+  "-": (x,y) => x - y,
+}
+
+Step 67
+Following the same pattern, add a property for multiplication * and division / with the appropriate functions.
+const infixToFunction = {
+  "+": (x, y) => x + y,
+  "-": (x, y) => x - y,
+  "*": (x,y) => x * y,
+  "/": (x,y) => x / y,
+}
+
+Step 68
+Now that you have your infix functions, you need a way to evaluate them. Declare an infixEval function which takes two parameters, str and regex. It should implicitly return the .replace() method of str, with regex and an empty callback as the arguments.
+Step 68 Solution
+const infixEval = (str, regex) => str.replace(regex, () => {});
+
+Step 69
+Your callback needs four parameters. match, arg1, operator, and arg2.
+You will not be using the match parameter, so remember to prefix it.
+
+Step 69 Solution
+const infixEval = (str, regex) => str.replace(regex, (_match, arg1, operator,arg2) => {});
+
+Step 70
+The regex you will be passing to your infixEval function will match two numbers with an operator between them. The first number will be assigned to arg1 in the callback, the second to arg2, and the operator to operator.
+Have your callback function implicitly return the operator property of your infixToFunction object. Remember that operator is a variable which holds the property name, not the actual property name.
+Your callback should use an implicit return.
+2. Your callback function should access the infixToFunction object.
+3. Your callback function should use bracket notation to access the property of the infixToFunction object that matches the value of the operator parameter.
+Your callback function should use bracket notation to access the property of the infixToFunction object that matches the value of the operator parameter.
+Step 70 Solution
+const infixEval = (str, regex) => str.replace(regex, (_match, arg1, operator, arg2) => infixToFunction[operator]);
+
+Step 71
+infixToFunction[operator] returns a function. Call that function directly, passing arg1 and arg2 as the arguments.
+Step 71 Solution
+const infixEval = (str, regex) => str.replace(regex, (_match, arg1, operator, arg2) => infixToFunction[operator](arg1,arg2));
+
+Step 72
+You have a slight bug. arg1 and arg2 are strings, not numbers. infixToFunction['+']("1", "2") would return 12, which is not mathematically correct.
+Wrap each of your infixToFunction[operator] arguments in a parseFloat() call.
+const infixEval = (str, regex) => str.replace(regex, (_match, arg1, operator, arg2) => infixToFunction[operator](parseFloat(arg1), parseFloat(arg2)));
+
+Step 73
+Now that you can evaluate mathematical expressions, you need to account for order of operations. Declare a highPrecedence function that takes a str parameter.
+const highPrecedence = (str) => {};
+
+Step 74
+In your highPrecedence function, declare a variable using const and assign it a regex that checks if the string passed to the str parameter matches the pattern of a number followed by a * or / operator followed by another number.
+Your function should return a boolean value. Remember that you can use the test() method for this.
+Step 74 Solution
+const highPrecedence = str => {
+  const regex = /([\d.]+)([*\/])([\d.]+)/;
+ return regex.test(str);
+}
+
+Step 75
+You should use console.log() to print the result of calling the highPrecedence function with the string "5*3".
+const highPrecedence = str => {
+  const regex = /([\d.]+)([*\/])([\d.]+)/;
+  return regex.test(str);
+}
+ console.log(highPrecedence("5*3"));
+ 
+Step 76
+Remove both the console.log() with your highPrecedence call, and the return statement from your highPrecedence function.
+const highPrecedence = str => {
+  const regex = /([\d.]+)([*\/])([\d.]+)/;
+}
+
+Step 77
+Now that you have a regular expression to match multiplication or division, you can evaluate that expression.
+Declare a str2 variable and assign it the result of calling infixEval with str and regex as arguments.
+const highPrecedence = str => {
+  const regex = /([\d.]+)([*\/])([\d.]+)/;
+  const str2 = infixEval(str, regex);
+}
+
+Step 78
+Your infixEval function will only evaluate the first multiplication or division operation, because regex isn't global. This means you'll want to use a recursive approach to evaluate the entire string.
+If infixEval does not find any matches, it will return the str value as-is. Using a ternary expression, check if str2 is equal to str. If it is, return str, otherwise return the result of calling highPrecedence() on str2.
+Hints
+1. Your highPrecedence function should use the return keyword.
+2. You should use the return keyword with a condition to check if str is equal to str2.
+3. You should use ternary syntax with your return statement.
+4. If the ternary condition is true, you should return str.
+5. If the ternary condition is false, you should return the result of calling highPrecedence().
+6. You should pass str2 to your highPrecedence() call.
+Step 78 Solution
+const highPrecedence = str => {
+  const regex = /([\d.]+)([*\/])([\d.]+)/;
+  const str2 = infixEval(str, regex);
+  return str2 === str? str : highPrecedence(str2);
+}
+
+Step 79
+Now you can start applying your function parsing logic to a string. Declare a function called applyFunction, which takes a str parameter.
+const applyFunction = (str) => {};
+
+Step 80
+First you need to handle the higher precedence operators. Declare a noHigh variable, and assign it the result of calling highPrecedence() with str as an argument.
+const applyFunction = str => {
+ const noHigh = highPrecedence(str);
+}
+
+Step 81
+Now that you've parsed and evaluated the multiplication and division operators, you need to do the same with the addition and subtraction operators.
+Declare an infix variable, and assign it a regular expression that matches a number (including decimal numbers) followed by a + or - operator followed by another number.
+Step 81 Solution
+const applyFunction = str => {
+  const noHigh = highPrecedence(str);
+ const infix = /([\d.]+)([+-])([\d.]+)/;
+}
+
+Step 82
+Declare a str2 variable, and assign it the result of calling infixEval() with noHigh and infix as arguments.
+const applyFunction = str => {
+  const noHigh = highPrecedence(str);
+  const infix = /([\d.]+)([+-])([\d.]+)/;
+  const str2 = infixEval(noHigh, infix);
+}
+
+Step 83
+Declare a functionCall variable, and assign it this regular expression: /([a-z0-9])\(([0-9., ])\)(?!.*\()/i
+This expression will look for function calls like sum(1, 4).
+const applyFunction = str => {
+  const noHigh = highPrecedence(str);
+  const infix = /([\d.]+)([+-])([\d.]+)/;
+  const str2 = infixEval(noHigh, infix);
+  const functionCall = /([a-z0-9]*)\(([0-9., ]*)\)(?!.*\()/i
+}
+
+Step 84
+Declare a toNumberList function that takes an args parameter and implicitly returns the result of splitting the args by commas. Then chain a map method to your split method and pass in parseFloat as the argument to the map method.
+Hints
+1. You should declare a toNumberList variable.
+2. You should use const to declare your toNumberList variable.
+3. Your toNumberList variable should be an arrow function.
+4. Your toNumberList function should have an args parameter.
+6. Your toNumberList function should return the result of calling the .split() method of args.
+7. You should split args on the "," character.
+8. You should chain the .map() method to the .split() method.
+9. You should pass a reference to parseFloat as the callback to .map().
+Step 84 Solution
+const applyFunction = str => {
+  const noHigh = highPrecedence(str);
+  const infix = /([\d.]+)([+-])([\d.]+)/;
+  const str2 = infixEval(noHigh, infix);
+  const functionCall = /([a-z0-9]*)\(([0-9., ]*)\)(?!.*\()/i;
+  const toNumberList = (args) => args.split(",").map(parseFloat);
+}
+
+Step 85
+Declare an apply function that takes a fn and args parameter.
+const apply = (fn,args) => {};
+
+Step 86
+The fn parameter will be passed the name of a function, such as "SUM". Update apply to implicitly return the function from your spreadsheetFunctions object using the fn variable as the key for the object access.
+Remember that fn might not contain a lowercase string, so you'll need to convert it to a lowercase string.
+Hints
+Your apply function should use an implicit return.
+2. Your apply function should access the spreadsheetFunctions object.
+3. Your apply function should access the property of the spreadsheetFunctions object that matches the fn value.
+4. Your apply function should call the .toLowerCase() method on fn in the property access.
+Step 86 Solution
+const applyFunction = str => {
+  const noHigh = highPrecedence(str);
+  const infix = /([\d.]+)([+-])([\d.]+)/;
+  const str2 = infixEval(noHigh, infix);
+  const functionCall = /([a-z0-9]*)\(([0-9., ]*)\)(?!.*\()/i;
+  const toNumberList = args => args.split(",").map(parseFloat);
+  const apply = (fn, args) => spreadsheetFunctions[fn.toLowerCase()]
+}
+
+Step 87
+Your apply function is returning the spreadsheet function, but not actually applying it. Update apply to call the function. Pass in the result of calling toNumberList with args as an argument.
+Step 87 Solution
+const applyFunction = str => {
+  const noHigh = highPrecedence(str);
+  const infix = /([\d.]+)([+-])([\d.]+)/;
+  const str2 = infixEval(noHigh, infix);
+  const functionCall = /([a-z0-9]*)\(([0-9., ]*)\)(?!.*\()/i;
+  const toNumberList = args => args.split(",").map(parseFloat);
+  const apply = (fn, args) => spreadsheetFunctions[fn.toLowerCase()](toNumberList(args));
+}
+
+Step 88
+Now your applyFunction needs to return a result. Return the result of calling the .replace() method on str2. Pass your functionCall regex and an empty callback.
+Step 88 Solution
+const applyFunction = str => {
+  const noHigh = highPrecedence(str);
+  const infix = /([\d.]+)([+-])([\d.]+)/;
+  const str2 = infixEval(noHigh, infix);
+  const functionCall = /([a-z0-9]*)\(([0-9., ]*)\)(?!.*\()/i;
+  const toNumberList = args => args.split(",").map(parseFloat);
+  const apply = (fn, args) => spreadsheetFunctions[fn.toLowerCase()](toNumberList(args));
+  return str2.replace(functionCall, ()=>{});
+}
+
+Step 89
+Update the callback function to take match, fn, and args as parameters. It should implicitly return the result of checking whether spreadsheetFunctions has its own property of fn.
+Remember to make fn lower case.
+To check if a property on a given object exists or not, you can use the hasOwnProperty() method.
+The hasOwnProperty() method returns true or false depending on if the property is found on the object or not.
+Here is an example of how to use the hasOwnProperty() method:
+Example Code
+const developerObj = {
+  name: 'John',
+  age: 34,
+}
+developerObj.hasOwnProperty('name'); // true
+developerObj.hasOwnProperty('salary'); // false
+
+Hints
+1. Your callback function should have match as the first parameter.
+2. Your callback function should have fn as the second parameter.
+3. Your callback function should have args as the third parameter.
+5. Your callback function should return the result of calling the .hasOwnProperty() method on the spreadsheetFunctions object.
+6. You should pass fn to the .hasOwnProperty() method.
+7. You should call the .toLowerCase() method on fn.
+Step 89 Solution
+const applyFunction = str => {
+  const noHigh = highPrecedence(str);
+  const infix = /([\d.]+)([+-])([\d.]+)/;
+  const str2 = infixEval(noHigh, infix);
+  const functionCall = /([a-z0-9]*)\(([0-9., ]*)\)(?!.*\()/i;
+  const toNumberList = args => args.split(",").map(parseFloat);
+  const apply = (fn, args) => spreadsheetFunctions[fn.toLowerCase()](toNumberList(args));
+  return str2.replace(functionCall, (match, fn, args) => spreadsheetFunctions.hasOwnProperty(fn.toLowerCase()));
+}
+
+Step 90
+Use the ternary operator to turn your .hasOwnProperty() call into the condition. If the object has the property, return the result of calling apply with fn and args as arguments. Otherwise, return match.
+Step 90 Solution
+const applyFunction = str => {
+  const noHigh = highPrecedence(str);
+  const infix = /([\d.]+)([+-])([\d.]+)/;
+  const str2 = infixEval(noHigh, infix);
+  const functionCall = /([a-z0-9]*)\(([0-9., ]*)\)(?!.*\()/i;
+  const toNumberList = args => args.split(",").map(parseFloat);
+  const apply = (fn, args) => spreadsheetFunctions[fn.toLowerCase()](toNumberList(args));
+  return str2.replace(functionCall, (match, fn, args) => spreadsheetFunctions.hasOwnProperty(fn.toLowerCase())? apply(fn,args) : match);
+}
+
+Step 91
+Now you can start applying your function parser to your evalFormula logic. Declare a functionExpanded variable, and assign it the result of calling applyFunction with your cellExpanded string.
+ const functionExpanded = applyFunction(cellExpanded);
+ 
+Step 92
+Like you did with your highPrecedence() function, your evalFormula() function needs to ensure it has evaluated and replaced everything.
+Use a ternary to check if functionExpanded is equal to the original string x. If it is, return functionExpanded, otherwise return the result of calling evalFormula() again with functionExpanded and cells as arguments.
+Step 92 Solution
+ return functionExpanded === x? functionExpanded : evalFormula(functionExpanded, cells);
+ 
+Step 93
+Now your update() function can actually evaluate formulas. Remember that you wrote the if condition to check that a function was called.
+Inside your if statement, set the value of the element to be the result of your evalFormula() function. Do not pass any arguments yet.
+Hints 
+1.You should update the value property of element in your if block.
+2. You should assign the value property the result of calling your evalFormula() function.
+3. You should not pass any arguments to your evalFormula() call.
+const update = event => {
+  const element = event.target;
+  const value = element.value.replace(/\s/g, "");
+  if (!value.includes(element.id) && value.startsWith('=')) {
+   element.value = evalFormula();
+  }
+}
+
+Step 94
+The first argument for your evalFormula call needs to be the contents of the cell (which you stored in value). However, the contents start with an = character to trigger the function, so you need to pass the substring of value starting at index 1.
+Hints
+You should pass value as the first argument to your evalFormula() call.
+2. You should call the .slice() method on the value argument.
+3. You should pass the number 1 as the argument to your .slice() call
+Step 94 Solution
+const update = event => {
+  const element = event.target;
+  const value = element.value.replace(/\s/g, "");
+  if (!value.includes(element.id) && value.startsWith('=')) {
+    element.value = evalFormula(value.slice(1));
+  }
+}
+
+Step 95
+You can quickly get all cells from your page by getting the #container element by its id and accessing the children property of the result. Pass that to your evalFormula() call as the second parameter.
+Hints
+For the second parameter of your evalFormula() call, you should call the .getElementById() method of the document object.
+2. You should pass container as the argument to your .getElementById() call.
+3. You should access the children property of the result of your .getElementById() call.
+Step 95 Solution
+const update = event => {
+  const element = event.target;
+  const value = element.value.replace(/\s/g, "");
+  if (!value.includes(element.id) && value.startsWith('=')) {
+    element.value = evalFormula(value.slice(1), document.getElementById("container").children);
+  }
+}
+
+Step 96
+Unfortunately, that children property is returning a collection of elements, which is array-like but not an array. Wrap your second argument in Array.from() to convert it to an array.
+Step 96 Solution
+const update = event => {
+  const element = event.target;
+  const value = element.value.replace(/\s/g, "");
+  if (!value.includes(element.id) && value.startsWith('=')) {
+    element.value = evalFormula(value.slice(1),  Array.from(document.getElementById("container").children));
+  }
+}
+
+Step 97
+Your spreadsheet is now functional. However, you don't have support for very many formulas.
+Add an even property to your spreadsheetFunctions. It should take a nums parameter, and return the result of filtering the nums array to only include even numbers. Use a reference to your isEven function to help.
+Hints
+// running tests
+1. Your spreadsheetFunctions object should have an even property.
+2. Your even property should be a function.
+3. Your even function should take a nums parameter.
+5. Your even function should return the result of calling the .filter() method on nums.
+6. You should pass a reference to your isEven() function as the callback for the .filter() method.
+7. Your even function should return an array of even numbers.
+// tests completed
+Hints
+Your even function should return the result of calling the .filter() method on nums.
+Step 97
+const spreadsheetFunctions = {
+  sum,
+  average,
+  median,
+ even: (nums) => nums.filter(isEven)
+}
+
+Step 98
+Add a firsttwo property which takes a nums parameter and returns the first two elements of the nums array in order. Then add a lasttwo property which returns the last two elements of the nums array in order.
+Hints
+1. Your spreadsheetFunctions object should have a firsttwo property.
+2. Your firsttwo property should be a function.
+3. Your firsttwo function should return the first two numbers of the array.
+4. Your spreadsheetFunctions object should have a lasttwo property.
+5. Your lasttwo property should be a function.
+6. Your lasttwo function should return the last two numbers of the array.
+Step 98 Solution
+const spreadsheetFunctions = {
+  sum,
+  average,
+  median,
+  even: nums => nums.filter(isEven),
+  firsttwo: nums => nums.slice(0,2),
+  lasttwo: nums => nums.slice(-2)
+}
+
+Step 99
+Add a has2 property which returns whether the nums array has 2 in the values, and an increment property which returns nums with every value incremented by one.
+Hints
+1. Your spreadsheetFunctions object should have a has2 property.
+2. Your has2 property should be a function.
+3. Your has2 function should return true if the array has 2 in it.
+4. Your has2 function should return false if the array does not have 2 in it.
+5. Your spreadsheetFunctions object should have an increment property.
+6. Your increment property should be a function.
+7. Your increment function should return an array of numbers incremented by one.
+Step 99 Solution
+const spreadsheetFunctions = {
+  sum,
+  average,
+  median,
+  even: nums => nums.filter(isEven),
+  firsttwo: nums => nums.slice(0, 2),
+  lasttwo: nums => nums.slice(-2),
+  has2: nums => nums.includes(2),
+  increment: nums => nums.map(value => value +1)
+}
+
+Step 100
+Add a someeven property to your spreadsheetFunctions - use the .some() method to check if any element in the array is even.
+Hints
+1.Your spreadsheetFunctions object should have a someeven property.
+2. Your someeven property should be a function.
+3. Your someeven function should return true if some of the elements in the array are even.
+4. Your someeven function should return false if none of the elements in the array are even.
+Step 100 Solution
+const spreadsheetFunctions = {
+  sum,
+  average,
+  median,
+  even: nums => nums.filter(isEven),
+
+  firsttwo: nums => nums.slice(0, 2),
+  lasttwo: nums => nums.slice(-2),
+  has2: nums => nums.includes(2),
+  increment: nums => nums.map(num => num + 1),
+  someeven: nums => nums.some(element => element % 2 === 0)
+}
+
+Step 101
+Arrays have an .every() method. Like the .some() method, .every() accepts a callback function which should take an element of the array as the argument. The .every() method will return true if the callback function returns true for all elements in the array.
+Here is an example of a .every() method call to check if all elements in the array are uppercase letters.
+Example Code
+const arr = ["A", "b", "C"];
+arr.every(letter => letter === letter.toUpperCase());
+Add an everyeven property to your spreadsheetFunctions - use the .every() method to check whether all array elements are even.
+Step 101 Solution
+const spreadsheetFunctions = {
+  sum,
+  average,
+  median,
+  even: nums => nums.filter(isEven),
+  someeven: nums => nums.some(isEven),
+
+  firsttwo: nums => nums.slice(0, 2),
+  lasttwo: nums => nums.slice(-2),
+  has2: nums => nums.includes(2),
+  increment: nums => nums.map(num => num + 1),
+  everyeven: nums => nums.every(elements => elements % 2 ===0)
+}
+
+Step 102
+Create a random property. This property should use the first two numbers from an array to generate a random whole number. The range for this number starts at the first number (inclusive) of the two and ends just before the sum of these two numbers. Use the Math.floor() and Math.random() methods for the calculation.
+Hints
+1.Your spreadsheetFunctions object should have a random property.
+2. Your random property should be a function.
+3. Your random function should return a random number between the first two numbers in the array.
+4. Your random function should return a whole number (integer).
+Step 102 Solution
+const spreadsheetFunctions = {
+  sum,
+  average,
+  median,
+  even: nums => nums.filter(isEven),
+  someeven: nums => nums.some(isEven),
+  everyeven: nums => nums.every(isEven),
+  firsttwo: nums => nums.slice(0, 2),
+  lasttwo: nums => nums.slice(-2),
+  has2: nums => nums.includes(2),
+  increment: nums => nums.map(num => num + 1),
+  random: ([x,y]) => Math.floor(Math.random()*x+y)
+}
+
+Step 103
+Add a range property which generates a range from the first number in nums to the second number in nums. Remember that you have a range function you can reuse here.
+Hints
+1. Your spreadsheetFunctions object should have a range property.
+2. Your range property should be a function.
+3. Your range function should return an array of consecutive numbers from the first number in the argument to the second number in the argument.
+Step 103 Solution
+const spreadsheetFunctions = {
+  sum,
+  average,
+  median,
+  even: nums => nums.filter(isEven),
+  someeven: nums => nums.some(isEven),
+  everyeven: nums => nums.every(isEven),
+  firsttwo: nums => nums.slice(0, 2),
+  lasttwo: nums => nums.slice(-2),
+  has2: nums => nums.includes(2),
+  increment: nums => nums.map(num => num + 1),
+  random: ([x, y]) => Math.floor(Math.random() * y + x),
+  range: nums => range(...nums)
+}
+
+Step 104
+The last function has a few approaches to implement, and you are free to choose whichever approach you would like.
+Add a nodupes property which returns nums with all duplicate values removed. For example, [2, 1, 2, 5, 3, 2, 7] should return [2, 1, 5, 3, 7].
+Hints
+1. Your spreadsheetFunctions object should have a nodupes property.
+2. Your nodupes property should be a function.
+3. Your nodupes function should remove all duplicate values from the array.
+Step 104 Solution
+const spreadsheetFunctions = {
+  sum,
+  average,
+  median,
+  even: nums => nums.filter(isEven),
+  someeven: nums => nums.some(isEven),
+  everyeven: nums => nums.every(isEven),
+  firsttwo: nums => nums.slice(0, 2),
+  lasttwo: nums => nums.slice(-2),
+  has2: nums => nums.includes(2),
+  increment: nums => nums.map(num => num + 1),
+  random: ([x, y]) => Math.floor(Math.random() * y + x),
+  range: nums => range(...nums),
+  nodupes: nums => [... new Set(nums)]
+}
+
+Step 105
+Finally, to handle potential edge cases, add an empty string property (you will need to use quotes) which is a function that takes a single argument and returns that argument.
+With that, your spreadsheet project is now complete. You are welcome to experiment with adding support for even more functions.
+Hints
+ Your spreadsheetFunctions object should have an empty string property.
+2. Your empty string property should be a function.
+3. Your empty string property function should return the argument.
+// tests completed
+Step 105 Solution
+const spreadsheetFunctions = {
+  
+  sum,
+  average,
+  median,
+  even: nums => nums.filter(isEven),
+  someeven: nums => nums.some(isEven),
+  everyeven: nums => nums.every(isEven),
+  firsttwo: nums => nums.slice(0, 2),
+  lasttwo: nums => nums.slice(-2),
+  has2: nums => nums.includes(2),
+  increment: nums => nums.map(num => num + 1),
+  random: ([x, y]) => Math.floor(Math.random() * y + x),
+  range: nums => range(...nums),
+  nodupes: nums => [...new Set(nums).values()],
+  "": nums => nums
+}
